@@ -54,7 +54,7 @@ export default function Home() {
             <ProfileCard />
           </div>
         </div>
-        <div className='w-1/2 pt-5'>
+        <div className='w-1/2 pt-5'>``
           <CreatePost user={user} />
           <Card className="w-full mt-5">
             {posts?.map((post) => (
@@ -62,7 +62,7 @@ export default function Home() {
             ))}
           </Card>
         </div>
-        <div className='p-5 w-1/4'>
+        <div className='p-5 w-1/4' >
           <div className='sticky top-5'>
             <aside className="hidden h-fit xl:sticky xl:top-21 xl:block">
               <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
@@ -73,9 +73,6 @@ export default function Home() {
                       Suggested Friends
                     </h3>
                   </div>
-                  {/* <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-bold text-slate-600">
-                    5
-                  </span> */}
                 </div>
 
                 <div className="mb-3">
