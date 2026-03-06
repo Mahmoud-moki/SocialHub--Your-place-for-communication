@@ -18,7 +18,7 @@ export default function Home() {
   const GetAllPosts = () => {
     return axios.get("https://route-posts.routemisr.com/posts", {
       params: { limit: 20 },
-      headers: { Token: localStorage.getItem("Token") },
+      headers: { Token: localStorage.getItem("token") },
     });
   };
 

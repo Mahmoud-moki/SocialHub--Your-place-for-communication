@@ -1,9 +1,14 @@
 import { Avatar, Button, Card, Textarea } from '@heroui/react'
 import { IconBulb, IconContrast2, IconSend } from '@tabler/icons-react'
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import React from 'react'
 
 export default function CreatePost({ user }) {
+
+
+
+
+  
 
 
 

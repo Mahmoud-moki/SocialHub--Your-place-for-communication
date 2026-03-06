@@ -7,7 +7,7 @@ export default function SuggestionLayout() {
     return axios.get(
       "https://route-posts.routemisr.com/users/suggestions?limit=4",
       {
-        headers: { Token: localStorage.getItem("Token") },
+        headers: { Token: localStorage.getItem("token") },
       }
     );
   };

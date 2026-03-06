@@ -37,7 +37,9 @@ export default function Login() {
         navigate('/home');
         // const userToken = resp.data.token;
         setUserAuthToken(resp.data.token);
-        localStorage.setItem('token', resp.data.token )
+        localStorage.setItem('token',resp.data.data.token)
+        // console.log('token' , resp.data.data.token );
+        
       }).catch(function (error) {
         // console.log('errooooooor', error);
         swal("Failed to log in", "", "error");

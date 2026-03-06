@@ -10,5 +10,7 @@ export default defineConfig({
     tailwindcss(),
     
   ],
+  base: "/SocialHub--Your-place-for-communication/",
+
 
 })

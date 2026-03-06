@@ -39,13 +39,16 @@ export default function Login() {
 
 
     function MyHandleForm(Values) {
-        console.log('Submitting', Values)
+        // console.log('Submitting', Values)
         axios.post('https://route-posts.routemisr.com/users/signup', Values)
             .then(function (resp) {
                 console.log(resp.data.message);
                 // setSuccessResponse(true)
                 swal("Sign in Successful", "", "success");
-                navigate('/home');
+                // navigate('/home');
+                localStorage.setItem('token',resp.data.data.token)
+                // console.log('token' , resp);
+                
             }).catch(function (error) {
                 console.log('errooooooor', error);
                 swal("Failed to log in", "", "error");

@@ -1,6 +1,6 @@
 import { Avatar, Button, Card, CardBody, Divider } from '@heroui/react'
 import { useQuery } from '@tanstack/react-query';
-import React, { createContext, useContext } from 'react'
+// import React, { createContext, useContext } from 'react'
 import axios from 'axios';
 import { BeatLoader } from 'react-spinners';
 import { IconBookmark, IconCalendarEvent, IconHomeFilled, IconLogout, IconSettings, IconUser, IconUsers } from '@tabler/icons-react';
@@ -10,7 +10,7 @@ export default function ProfileCard({setUserPhoto }) {
 
   const GetUserData = () => {
     return axios.get("https://route-posts.routemisr.com/users/profile-data", {
-      headers: { Token: localStorage.getItem("Token") },
+      headers: { Token: localStorage.getItem("token") },
     });
   };
 
@@ -24,7 +24,7 @@ export default function ProfileCard({setUserPhoto }) {
   }
 
   // console.log('Ermmm', data?.data?.data?.user);
-  const { name, photo, followersCount, followingCount } = data?.data?.data?.user
+  const { name, photo, followersCount, followingCount } = data?.data?.data?.user;
 
   return (
     <>

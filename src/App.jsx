@@ -17,16 +17,19 @@ import { UserProvider } from './assets/context/UserData';
 
 
 const queryClient = new QueryClient()
-const router = createBrowserRouter([
-  { path: "/", element: <Login />, },
-  { path: "Login", element: <Login />, },
-  { path: "/Signup", element: <SignUp />, },
-  { path: "/Home", element: <UserProvider><Home /></UserProvider>, },
-  // { path: "/PostLayout", element: <PostLayout />, },
+const router = createBrowserRouter(
+  [
+    { path: "/", element: <Login /> },
+    { path: "/login", element: <Login /> },
+    { path: "/signup", element: <SignUp /> },
+    { path: "/home", element: <UserProvider><Home /></UserProvider> },
+    // { path: "/postlayout", element: <PostLayout /> },
+  ],
+  {
+    basename: "/SocialHub--Your-place-for-communication/"
+  }
+);
 
-
-
-]);
 
 export default function App() {
 
