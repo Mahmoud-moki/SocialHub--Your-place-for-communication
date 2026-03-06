@@ -6,24 +6,56 @@ import {
   Divider,
   Image,
   Avatar,
-  Button
+  Button,
+  Textarea
 } from "@heroui/react";
 
 import {
   IconThumbUp, IconMessageDots, IconShare3,
+  IconPhoto,
+  IconMoodSmile,
+  IconSend,
 } from "@tabler/icons-react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import CreateComment from "../createComment/CreateComment";
 
-export default function Post({ post }) {
-  const { body, image, user, createdAt, topComment } = post;
+export default function Post({ post , user: userdata  }) {
+  const { body, image, user, createdAt, topComment, id } = post;
   const { photo, name } = user;
   const firstComment = topComment ?? null;
   const commentContent = firstComment?.content;
   const commentCreator = firstComment?.commentCreator;
 
+  // console.log("post details", post);
+
+
+  const queryClient = useQueryClient();
+
+  const createComment = (formData) => {
+    return axios.post(
+      `https://route-posts.routemisr.com/posts/${id}/comments`,
+      formData,
+      {
+        headers: {
+          Token: localStorage.getItem("token"),
+        }
+      }
+    )
+  }
+
+  const { data, isPending, mutate } = useMutation({
+    mutationFn: createComment,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["GetAllPosts"] });
+    }
+  })
+
+
+
   return (
     <Card className="w-full mb-5">
       <CardHeader className="flex gap-3">
-        <Avatar src={photo} className="w-10 h-10" />
+        <Avatar src={user?.photo} className="w-10 h-10" />
         <div className="flex flex-col">
           <p className="font-semibold">{name}</p>
           <p className="text-xs text-default-500">{createdAt}</p>
@@ -73,7 +105,9 @@ export default function Post({ post }) {
             No comments yet. Be the first to comment
           </p>
         )}
+
       </CardFooter>
+      <CreateComment user={userdata} post={post}/>
     </Card>
   );
 }

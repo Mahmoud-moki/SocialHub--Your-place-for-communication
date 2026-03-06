@@ -9,7 +9,7 @@ export function UserProvider({ children }) {
 
   const GetUserData = () => {
     return axios.get("https://route-posts.routemisr.com/users/profile-data", {
-      headers: { Token: localStorage.getItem("Token") },
+      headers: { Token: localStorage.getItem("token") },
     });
   };
 

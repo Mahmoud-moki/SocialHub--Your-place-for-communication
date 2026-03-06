@@ -55,74 +55,7 @@ export default function ProfileCard({setUserPhoto }) {
 
         </CardBody>
       </Card>
-      <Card className="bg-white boreder border-gray-300 rounded-2xl shadow-gray-500 shadow p-4 ">
 
-        <ul className="space-y-1">
-          <li>
-            <a
-              href="/"
-              className="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 bg-linear-to-r from-blue-500 to-cyan-400 text-white"
-            >
-              <IconHomeFilled className="text-lg" />
-              <span className="font-medium">Home</span>
-            </a>
-          </li>
-          <li>
-            <a
-              href="/profile"
-              className="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 hover:bg-gray-100 text-gray-700"
-            >
-              <IconUser className="text-lg" />
-              <span className="font-medium">Profile</span>
-            </a>
-          </li>
-          <li>
-            <a
-              href="/saved"
-              className="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 hover:bg-gray-100 text-gray-700"
-            >
-              <IconBookmark className="text-lg" />
-              <span className="font-medium">Saved Posts</span>
-            </a>
-          </li>
-          <li>
-            <a
-              href="/friends"
-              className="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 hover:bg-gray-100 text-gray-700"
-            >
-              <IconUsers className="text-lg" />
-              <span className="font-medium">Friends</span>
-            </a>
-          </li>
-          <li>
-            <a
-              href="/events"
-              className="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 hover:bg-gray-100 text-gray-700"
-            >
-              <IconCalendarEvent className="text-lg" />
-              <span className="font-medium">Events</span>
-            </a>
-          </li>
-          <li>
-            <a
-              href="/settings"
-              className="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 hover:bg-gray-100 text-gray-700"
-            >
-              <IconSettings className="text-lg" />
-              <span className="font-medium">Settings</span>
-            </a>
-          </li>
-        </ul>
-        <Divider />
-        <div className="  pt-4">
-          <Button
-            className="flex  gap-3 px-4 bg-transparent py-3 rounded-xl text-red-500 hover:bg-red-50 w-full transition-all duration-200"
-          >
-            <IconLogout className="text-lg" />
-            <span className="font-medium">Logout</span>
-          </Button>
-        </div>
-      </Card>
 
     </>
 

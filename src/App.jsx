@@ -14,6 +14,7 @@ import {
 } from '@tanstack/react-query'
 import PostLayout from './assets/Postlayout/PostLayout'
 import { UserProvider } from './assets/context/UserData';
+import Profile from './assets/Profile/Profile';
 
 
 const queryClient = new QueryClient()
@@ -23,6 +24,8 @@ const router = createBrowserRouter(
     { path: "/login", element: <Login /> },
     { path: "/signup", element: <SignUp /> },
     { path: "/home", element: <UserProvider><Home /></UserProvider> },
+    { path: "/profile", element: <UserProvider><Profile /></UserProvider> },
+
     // { path: "/postlayout", element: <PostLayout /> },
   ],
   {

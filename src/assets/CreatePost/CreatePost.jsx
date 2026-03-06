@@ -6,6 +6,7 @@ import React from 'react'
 
 export default function CreatePost({ user }) {
 
+  // console.log("user" , user);
 
   const queryClient = useQueryClient();
 
@@ -28,6 +29,13 @@ export default function CreatePost({ user }) {
     }
   })
 
+  const HandlePost = (e) => {
+    e.preventDefault();
+  
+    const formData = new FormData(e.target);
+  
+    mutate(formData);
+  };
 
   // if (mutation.isPending) {
   //   console.log("Sending data" , data)
@@ -49,13 +57,7 @@ export default function CreatePost({ user }) {
         </div>
       </header>
 
-      <form className="space-y-4" onSubmit={(e) => {
-        e.preventDefault()
-
-        const formData = new FormData(e.target)
-
-        mutate(formData)
-      }}>
+      <form className="space-y-4" onSubmit={HandlePost}>
 
         <div className="relative">
           <Textarea

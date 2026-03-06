@@ -10,6 +10,7 @@ import ProfileCard from '../ProfileCard/ProfileCard';
 import CreatePost from '../CreatePost/CreatePost';
 import { useUser } from '../context/UserData'
 import SuggestionLayout from '../SuggestionLayout/SuggestionLayout';
+import SideNav from '../SideNav/SideNav';
 // import Oval from "react-loader-spinner"
 
 
@@ -52,13 +53,14 @@ export default function Home() {
         <div className='p-5 w-1/4'>
           <div className='sticky top-5'>
             <ProfileCard />
+            <SideNav />
           </div>
         </div>
-        <div className='w-1/2 pt-5'>``
+        <div className='w-1/2 pt-5'>
           <CreatePost user={user} />
           <Card className="w-full mt-5">
-            {posts?.map((post) => (
-              <PostLayout key={post._id} post={post} />
+            {posts?.map((post) => ( 
+              <PostLayout key={post._id} post={post} user={user}/>
             ))}
           </Card>
         </div>
@@ -89,7 +91,7 @@ export default function Home() {
 
                 </div>
 
-                <SuggestionLayout />
+                <SuggestionLayout user={user} />
 
                 <button className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-bold text-slate-700 transition hover:bg-slate-100">
                   View more
