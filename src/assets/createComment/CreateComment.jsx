@@ -38,7 +38,7 @@ export default function CreateComment({ user, post }) {
         e.target.reset()
     };
 
-    console.log("Data" , data);
+    // console.log("Data" , data);
     
 
     return (

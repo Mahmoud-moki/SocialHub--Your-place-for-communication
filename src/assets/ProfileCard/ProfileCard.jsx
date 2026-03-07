@@ -6,7 +6,7 @@ import { BeatLoader } from 'react-spinners';
 import { IconBookmark, IconCalendarEvent, IconHomeFilled, IconLogout, IconSettings, IconUser, IconUsers } from '@tabler/icons-react';
 
 
-export default function ProfileCard({setUserPhoto }) {
+export default function ProfileCard({ setUserPhoto }) {
 
   const GetUserData = () => {
     return axios.get("https://route-posts.routemisr.com/users/profile-data", {
@@ -24,14 +24,21 @@ export default function ProfileCard({setUserPhoto }) {
   }
 
   // console.log('Ermmm', data?.data?.data?.user);
-  const { name, photo, followersCount, followingCount } = data?.data?.data?.user;
+  const { name, photo, followersCount, followingCount, cover } = data?.data?.data?.user;
 
   return (
     <>
       <Card className=" mb-5 overflow-hidden   shadow-gray-500 shadow ">
 
-        <div className="h-20 bg-linear-to-r from-blue-500 to-cyan-400 " />
-
+        {cover ? (
+          <img
+            src={cover}
+            alt="cover"
+            className="h-20 w-full object-cover"
+          />
+        ) : (
+          <div className="h-20 bg-linear-to-r from-blue-500 to-cyan-400" />
+        )}
         <CardBody className="px-5 pb-5 -mt-10">
 
           <Avatar

@@ -5,6 +5,7 @@ import SideNav from '../SideNav/SideNav';
 import PostLayout from "./../Postlayout/PostLayout";
 import { useQuery } from '@tanstack/react-query';
 import { BeatLoader } from 'react-spinners';
+import ProfileCard from '../ProfileCard/ProfileCard';
 
 
 export default function Profile() {
@@ -22,6 +23,8 @@ export default function Profile() {
         queryFn: GetUserPosts,
     });
 
+    
+
     const UserPosts = data?.data?.data?.posts;
 
 
@@ -32,11 +35,12 @@ export default function Profile() {
     return (
         <>
             <div className="flex p-5 gap-5">
-                <div className="w-1/2 sticky top-5 self-start">
-                    <SideNav />
+                <div className="w-122 sticky top-5 self-start">
+                <ProfileCard />
+                <SideNav />
                 </div>
                 <div className='gap-2'>
-                    <ProfileCardPage user={user} />
+                    <ProfileCardPage user={user} post={UserPosts} />
                     <div className='py-3'>
                         {UserPosts?.map((post) => (
                             <PostLayout key={post._id} post={post} user={user} />
@@ -47,6 +51,9 @@ export default function Profile() {
         </>
     );
 }
+
+// https://route-posts.routemisr.com/users/upload-cover
+
 
 
 
