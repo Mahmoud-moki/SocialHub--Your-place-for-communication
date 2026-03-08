@@ -1,51 +1,80 @@
-import React from 'react'
-import Login from './assets/login/Login'
-import Home from './assets/Home/Home'
-import AuthContextProvider from './assets/context/Auth';
+import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import SignUp from './assets/SignUp/SignUp';
-import { HeroUIProvider } from '@heroui/react';
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from '@tanstack/react-query'
-import PostLayout from './assets/Postlayout/PostLayout'
-import { UserProvider } from './assets/context/UserData';
-import Profile from './assets/Profile/Profile';
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { HeroUIProvider } from "@heroui/react";
 
+import Login from "./assets/login/Login";
+import SignUp from "./assets/SignUp/SignUp";
+import Home from "./assets/Home/Home";
+import Profile from "./assets/Profile/Profile";
+import SavedPosts from "./assets/SavedPosts/SavedPosts";
+import Friends from "./assets/Friends/Friends";
+import Events from "./assets/Events/Events";
+import Settings from "./assets/Settings/Settings";
 
-const queryClient = new QueryClient()
+import { UserProvider } from "./assets/context/UserData";
+import AuthContextProvider, { ProtectedRoute } from "./assets/context/Auth";
+
+const queryClient = new QueryClient();
+
 const router = createBrowserRouter(
   [
     { path: "/", element: <Login /> },
     { path: "/login", element: <Login /> },
     { path: "/signup", element: <SignUp /> },
-    { path: "/home", element: <UserProvider><Home /></UserProvider> },
-    { path: "/profile", element: <UserProvider><Profile /></UserProvider> },
-
-    // { path: "/postlayout", element: <PostLayout /> },
+    {
+      path: "/home",
+      element: (
+        <ProtectedRoute><UserProvider><Home /></UserProvider></ProtectedRoute>
+      ),
+    },
+    {
+      path: "/profile",
+      element: (
+        <ProtectedRoute><UserProvider><Profile /></UserProvider>
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: "/savedposts",
+      element: (
+        <ProtectedRoute><UserProvider><SavedPosts /></UserProvider>
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: "/friends",
+      element: (
+        <ProtectedRoute><UserProvider><Friends /></UserProvider>
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: "/events",
+      element: (
+        <ProtectedRoute><UserProvider><Events /></UserProvider>
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: "/settings",
+      element: (
+        <ProtectedRoute><UserProvider><Settings /></UserProvider>
+        </ProtectedRoute>
+      ),
+    },
   ],
-  {
-    basename: "/SocialHub--Your-place-for-communication/"
-  }
+  { basename: "/SocialHub--Your-place-for-communication/" }
 );
 
-
 export default function App() {
-
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthContextProvider>
-        <HeroUIProvider>
-          <RouterProvider router={
-            router} />
-        </HeroUIProvider>
-      </AuthContextProvider>
+      <HeroUIProvider>
+        <AuthContextProvider>
+          <RouterProvider router={router} />
+        </AuthContextProvider>
+      </HeroUIProvider>
     </QueryClientProvider>
-
   );
-
 }

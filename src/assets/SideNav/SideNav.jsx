@@ -1,9 +1,18 @@
 import { Button, Card, Divider } from '@heroui/react'
 import { IconBookmark, IconCalendarEvent, IconHomeFilled, IconLogout, IconSettings, IconUser, IconUsers } from '@tabler/icons-react'
 import React from 'react'
-import { Link, NavLink  } from 'react-router-dom'
+import { Link, NavLink, useNavigate  } from 'react-router-dom'
 
 export default function SideNav() {
+
+  const navigate = useNavigate();
+
+  function removeToken(){
+    localStorage.removeItem("token");
+    navigate('/login');
+    swal("Logout successfully", "", "success")
+
+  }
 
   const linkClass = ({ isActive }) =>
     `flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 ${
@@ -37,14 +46,14 @@ export default function SideNav() {
       </li>
       <li>
         <NavLink 
-          to="/saved"
+          to="/savedposts"
           className={linkClass}
         >
           <IconBookmark className="text-lg" />
           <span className="font-medium">Saved Posts</span>
         </NavLink >
       </li>
-      <li>
+      {/* <li>
         <NavLink 
           to="/friends"
           className={linkClass}
@@ -61,10 +70,10 @@ export default function SideNav() {
           <IconCalendarEvent className="text-lg" />
           <span className="font-medium">Events</span>
         </NavLink >
-      </li>
+      </li> */}
       <li>
         <NavLink 
-          to="/settings"
+          to="/Settings"
           className={linkClass}
         >
           <IconSettings className="text-lg" />
@@ -75,7 +84,7 @@ export default function SideNav() {
     <Divider />
     <div className="  pt-4">
       <Button
-        className="flex  gap-3 px-4 bg-transparent py-3 rounded-xl text-red-500 hover:bg-red-50 w-full transition-all duration-200"
+        className="flex  gap-3 px-4 bg-transparent py-3 rounded-xl text-red-500 hover:bg-red-50 w-full transition-all duration-200" onClick={removeToken}
       >
         <IconLogout className="text-lg" />
         <span className="font-medium">Logout</span>

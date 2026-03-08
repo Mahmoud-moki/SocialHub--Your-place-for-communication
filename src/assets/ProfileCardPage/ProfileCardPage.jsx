@@ -6,21 +6,22 @@ import {
     Button,
     Image
 } from "@heroui/react";
-import { IconCamera, IconUsers, IconMail } from "@tabler/icons-react";
-import { useMutation } from "@tanstack/react-query";
+import { IconCamera, IconUsers, IconMail} from "@tabler/icons-react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
 export default function ProfileCardPage({ user, post }) {
 
+    const queryClient = useQueryClient();
 
 
 
     // console.log("data", user);
     // console.log("posts", post);
 
-    const ChangeCover = (formData) => {
-        return axios.post(
-            `https://route-posts.routemisr.com/${user.id}/uploadCoverPhoto`,
+    const ChangePfp = (formData) => {
+        return axios.put(
+            `https://route-posts.routemisr.com/users/upload-photo`,
             formData,
             {
                 headers: {
@@ -30,22 +31,59 @@ export default function ProfileCardPage({ user, post }) {
         )
     }
 
-    const { data, isPending, mutate } = useMutation({
-        mutationFn: ChangeCover,
+    const ChangeCoverImg = (formData) => {
+        return axios.put(
+            `https://route-posts.routemisr.com/users/upload-cover`,
+            formData,
+            {
+                headers: {
+                    Token: localStorage.getItem("token"),
+                }
+            }
+        )
+    }
+
+    const {mutate } = useMutation({
+        mutationFn: ChangePfp,
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ["GetAllPosts"] });
+            queryClient.invalidateQueries({ queryKey: ["GetUserData"] });
+            queryClient.invalidateQueries({ queryKey: ["GetUserPosts"] });
         }
     })
+
+    const {mutate: mutate1 } = useMutation({
+        mutationFn: ChangeCoverImg,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["GetUserData"] });
+            queryClient.invalidateQueries({ queryKey: ["GetUserPosts"] });
+        }
+    })
+
+
 const HandleChanceCover = (e) => {
   console.log("file selected", e.target.files[0]);
 
   const formData = new FormData();
-  formData.append("photo", e.target.files[0]);
+  formData.append("cover", e.target.files[0]);
 
-  mutate(formData);
+  mutate1(formData);
 };
 
-    console.log("sent data" , data);
+
+const HandleChancePfp = (e) => {
+    // console.log("file selected", e.target.files[0]);
+  
+    const formData = new FormData();
+    formData.append("photo", e.target.files[0]);
+  
+    mutate(formData);
+  };
+
+
+
+
+
+    // console.log("sent data" , data);
     
 
 
@@ -64,7 +102,7 @@ const HandleChanceCover = (e) => {
                         <label className="absolute top-3 right-3 flex items-center gap-2 bg-black/50 text-white text-xs font-bold px-3 py-1.5 rounded-lg cursor-pointer backdrop-blur hover:bg-black/60">
                             <IconCamera size={14} />
                             Change cover
-                            <input type="file" className="hidden" accept="image/*"   onChange={HandleChanceCover} />
+                            <input type="file" className="hidden"  onChange={HandleChanceCover}  />
                         </label>
                 </div>
             ) : (
@@ -75,7 +113,7 @@ const HandleChanceCover = (e) => {
                     <label className="absolute top-3 right-3 flex items-center gap-2 bg-black/50 text-white text-xs font-bold px-3 py-1.5 rounded-lg cursor-pointer backdrop-blur hover:bg-black/60">
                         <IconCamera size={14} />
                         Add cover
-                        <input type="file" className="hidden" accept="image/*"   onChange={HandleChanceCover} />
+                        <input type="file" className="hidden" accept="image/*" onChange={HandleChanceCover}  />
                     </label>
                 </div>
             )
@@ -92,17 +130,9 @@ const HandleChanceCover = (e) => {
                                     src={user?.photo}
                                     className="w-28 h-28 border-4 border-white shadow-md ring-2 ring-blue-100"
                                 />
-                                <Button
-                                    isIconOnly
-                                    size="sm"
-                                    radius="full"
-                                    className="absolute bottom-1 left-1 bg-white text-blue-600 shadow-sm opacity-0 group-hover:opacity-100"
-                                >
-                                    {/* <IconExpand size={16} /> */}
-                                </Button>
                                 <label className="absolute bottom-1 right-1 flex items-center justify-center w-9 h-9 rounded-full bg-blue-600 text-white cursor-pointer opacity-0 group-hover:opacity-100 hover:bg-blue-700">
                                     <IconCamera size={16} />
-                                    <input type="file" className="hidden" accept="image/*" />
+                                    <input type="file" className="hidden" accept="image/*" onChange={HandleChancePfp} />
                                 </label>
                             </div>
 

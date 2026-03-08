@@ -35,11 +35,11 @@ export default function Profile() {
     return (
         <>
             <div className="flex p-5 gap-5">
-                <div className="w-122 sticky top-5 self-start">
+                <div className="w-1/3 sticky top-5 self-start">
                 <ProfileCard />
                 <SideNav />
                 </div>
-                <div className='gap-2'>
+                <div className='gap-2 w-full'>
                     <ProfileCardPage user={user} post={UserPosts} />
                     <div className='py-3'>
                         {UserPosts?.map((post) => (

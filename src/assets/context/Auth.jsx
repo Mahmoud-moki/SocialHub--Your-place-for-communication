@@ -1,25 +1,27 @@
-import React, { createContext, useState } from 'react'
-import { useFormState } from 'react-dom';
-export const AuthContext = createContext()
+import React, { createContext, useContext, useState } from "react";
+import { Navigate, useLocation } from "react-router-dom";
+
+export const AuthContext = createContext();
 
 export default function AuthContextProvider({ children }) {
+  const [userToken, setUserAuthToken] = useState(
+    localStorage.getItem("token")
+  );
 
-     const [userToken , setuserToken] = useState(null);
+  return (
+    <AuthContext.Provider value={{ userToken, setUserAuthToken }}>
+      {children}
+    </AuthContext.Provider>
+  );
+}
 
-    function setUserAuthToken(tkn){
-        setuserToken(tkn);
+export function ProtectedRoute({ children }) {
+  const { userToken } = useContext(AuthContext);
+  const location = useLocation();
 
-        ;
-    }
+  if (!userToken) {
+    return <Navigate to="/login" replace state={{ from: location }} />;
+  }
 
-    // console.log('Token' , userToken);
-    
-
-    return (
-        <>
-        <AuthContext.Provider value={{ userToken , setUserAuthToken }}>
-            {children}
-        </AuthContext.Provider>
-        </>
-    )
+  return children;
 }

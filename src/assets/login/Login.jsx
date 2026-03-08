@@ -28,7 +28,7 @@ export default function Login() {
   
 
   function MyHandleForm(Values) {
-    console.log('Submitting', Values)
+    // console.log('Submitting', Values)
     axios.post('https://route-posts.routemisr.com/users/signin', Values)
       .then(function (resp) {
         console.log(resp.data.token);
@@ -36,7 +36,7 @@ export default function Login() {
         swal("Log in Successful", "", "success");
         navigate('/home');
         // const userToken = resp.data.token;
-        setUserAuthToken(resp.data.token);
+        setUserAuthToken(resp.data.data.token);
         localStorage.setItem('token',resp.data.data.token)
         // console.log('token' , resp.data.data.token );
         

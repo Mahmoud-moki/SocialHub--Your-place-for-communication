@@ -14,7 +14,7 @@ export default function ProfileCard({ setUserPhoto }) {
     });
   };
 
-  const { data, isLoading, isError, error, isFetched } = useQuery({
+  const { data, isLoading} = useQuery({
     queryKey: ["GetUserData"],
     queryFn: GetUserData,
   });

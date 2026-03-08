@@ -34,7 +34,8 @@ export default function Home() {
   const { user } = useUser();
 
 
-
+  // console.log("Posts" , posts);
+  
 
 
 
@@ -50,7 +51,7 @@ export default function Home() {
   return (
     <>
       <div className='flex'>
-        <div className='p-5 w-1/4'>
+        <div className='p-5 w-1/3'>
           <div className='sticky top-5'>
             <ProfileCard />
             <SideNav />
