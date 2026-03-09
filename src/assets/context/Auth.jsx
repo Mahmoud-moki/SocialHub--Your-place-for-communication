@@ -23,5 +23,9 @@ export function ProtectedRoute({ children }) {
     return <Navigate to="/login" replace state={{ from: location }} />;
   }
 
+  // if (userToken) {
+  //   return <Navigate to="/home" replace state={{ from: location }} />;
+  // }
+
   return children;
 }

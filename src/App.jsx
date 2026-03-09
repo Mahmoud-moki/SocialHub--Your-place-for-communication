@@ -14,14 +14,15 @@ import Settings from "./assets/Settings/Settings";
 
 import { UserProvider } from "./assets/context/UserData";
 import AuthContextProvider, { ProtectedRoute } from "./assets/context/Auth";
+import { PublicRoute } from "./assets/context/PublicRoute";
 
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter(
   [
-    { path: "/", element: <Login /> },
-    { path: "/login", element: <Login /> },
-    { path: "/signup", element: <SignUp /> },
+    { path: "/", element: <PublicRoute><Login /></PublicRoute> },
+    { path: "/login", element: <PublicRoute><Login /></PublicRoute> },
+    { path: "/signup", element: <PublicRoute><SignUp /></PublicRoute> },
     {
       path: "/home",
       element: (
